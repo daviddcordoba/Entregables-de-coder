@@ -9,3 +9,54 @@ body{
     align-items: center;
     background-color: pink;
 }
+
+/* Carrito */
+
+#carrito-container table{
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+#carrito-container table thead{
+    font-weight: 700;
+}
+
+#carrito-container table thead th{
+    background: pink;
+    color: white;
+    border: none;
+    padding: 6px 0;
+}
+
+#carrito-container table td{
+    border: 1px solid grey;
+    text-align: center;
+}
+
+#carrito-container table td:nth-child(1){
+    width: 100px;
+}
+
+#carrito-container table td:nth-child(2),
+#carrito-container table td:nth-child(3){
+    width: 200px;
+}
+
+#carrito-container table td:nth-child(4),
+#carrito-container table td:nth-child(5),
+#carrito-container table td:nth-child(6){
+    width: 170px;
+}
+
+.card-img-top
+{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+#carrito-container table tbody i{
+    color: violet;
+    
+}
