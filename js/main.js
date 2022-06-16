@@ -41,6 +41,7 @@ const agregarAlCarrito = (prodID) => {
     const item = stockProductos.find( (prod) => prod.id === prodID)
 
     carrito.push(item)
+    alert("Agregado al carrito")
     actualizarCarrito();
 }
 
@@ -48,7 +49,7 @@ const agregarAlCarrito = (prodID) => {
 const actualizarCarrito = () => {
     //Actualizo precio total
     precioTotal.innerText = "Total: " + carrito.reduce((acc,prod) => acc + prod.precio, 0);
-    
+
     tablaBody.innerHTML = "";//para que no se repitan elementos
 
     for(const producto of carrito){ 
