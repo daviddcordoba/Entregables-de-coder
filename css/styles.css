@@ -49,14 +49,18 @@ body{
     width: 170px;
 }
 
+
+#carrito-container table tbody i{
+    color: grey;
+    
+}
+
+
+
+/*Productos*/
 .card-img-top
 {
     width: 50px;
     height: 400px;
     object-fit: cover;
-}
-
-#carrito-container table tbody i{
-    color: grey;
-    
 }

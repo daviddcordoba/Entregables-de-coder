@@ -1,5 +1,15 @@
 const grupoCartas = document.getElementById('grupoCartas')
+const precioTotal = document.getElementById('precioTotal')
+    const tablaBody = document.getElementById('tablaBody')
 let carrito = [];
+
+document.addEventListener('DOMContentLoaded', () => {
+    if(localStorage.getItem('carrito')){
+        carrito = JSON.parse(localStorage.getItem('carrito'))
+        actualizarCarrito();
+    }
+})
+
 
 
 mostrarProductos();
@@ -32,16 +42,15 @@ const agregarAlCarrito = (prodID) => {
 
     carrito.push(item)
     actualizarCarrito();
-    console.log(carrito);
 }
 
 
 const actualizarCarrito = () => {
+    //Actualizo precio total
+    precioTotal.innerText = "Total: " + carrito.reduce((acc,prod) => acc + prod.precio, 0);
+    
+    tablaBody.innerHTML = "";//para que no se repitan elementos
 
-
-    const tablaBody = document.getElementById('tablaBody')
-
-    tablaBody.innerHTML = "";
     for(const producto of carrito){ 
         tablaBody.innerHTML+=`
         <tr>
@@ -51,23 +60,23 @@ const actualizarCarrito = () => {
         </tr>
         `;
 
-        document.getElementById(`eliminar(${producto.id})`).addEventListener('click', ()=>{
+        localStorage.setItem('carrito', JSON.stringify(carrito))
+
+        const botonEliminar = document.getElementById(`eliminar(${producto.id})`)
+        botonEliminar.addEventListener('click', ()=>{
             eliminarDelCarrito(producto.id)
         })
-
+        
     }
-
+    
 }
 
 
 
 const eliminarDelCarrito = (prodID) => {
-    const item = carrito.find((prod)=> prod.id === prodID)
+    const item = carrito.find((prod)=> prod.id === prodID) 
     const indice = carrito.indexOf(item)
 
     carrito.splice(indice,1)
     actualizarCarrito();
-
 }
-
-
