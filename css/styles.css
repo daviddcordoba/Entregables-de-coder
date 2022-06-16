@@ -51,12 +51,12 @@ body{
 
 .card-img-top
 {
-    width: 100px;
-    height: 100px;
+    width: 50px;
+    height: 400px;
     object-fit: cover;
 }
 
 #carrito-container table tbody i{
-    color: violet;
+    color: grey;
     
 }
