@@ -35,6 +35,15 @@ function mostrarProductos() {
     stockProductos.forEach(producto => {
         document.getElementById(`agregar${producto.id}`).addEventListener('click', function(){
             agregarAlCarrito(producto.id);
+            Toastify({
+                text: "Elemento agregado al carrito",
+                duration: 2000,
+                gravity: 'bottom',
+                position: 'left',
+                style: {
+                    background: 'linear-gradient(to right,#f0f, #f66)'
+                }
+            }).showToast();
         })
     })
 
@@ -44,7 +53,7 @@ const agregarAlCarrito = (prodID) => {
     const item = stockProductos.find( (prod) => prod.id === prodID)
 
     carrito.push(item)
-    alert("Agregado al carrito")
+    /* alert("Agregado al carrito") */
     actualizarCarrito();
 }
 
@@ -58,7 +67,7 @@ const actualizarCarrito = () => {
     for(const producto of carrito){ 
         tablaBody.innerHTML+=`
         <tr>
-            <td > <a id="eliminar(${producto.id})" href="#" class="btn btn-primary"><i class="bi bi-trash3-fill"></i></a></td>
+            <td > <a id="eliminar(${producto.id})" href="#cd tablaBody" class="btn btn-primary"><i class="bi bi-trash3-fill"></i></a></td>
             <td >${producto.nombre}</td>
             <td >$ ${producto.precio}</td>
         </tr>
