@@ -4,16 +4,13 @@ const tablaBody = document.getElementById('tablaBody')
 
 let carrito 
 
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', (e) => {
     if(localStorage.getItem('carrito')){
         carrito = JSON.parse(localStorage.getItem('carrito')) || [] // uso de operador logico OR
         actualizarCarrito();
     }
+    e.preventDefault();
 })
-
-
-
-
 
 mostrarProductos();
 
@@ -33,8 +30,10 @@ function mostrarProductos() {
 
     //Evento para el boton(que va a pasar cuando de click en 'comprar')
     stockProductos.forEach(producto => {
-        document.getElementById(`agregar${producto.id}`).addEventListener('click', function(){
+        document.getElementById(`agregar${producto.id}`).addEventListener('click', function(e){
+            
             agregarAlCarrito(producto.id);
+
             Toastify({
                 text: "Elemento agregado al carrito",
                 duration: 2000,
@@ -44,6 +43,8 @@ function mostrarProductos() {
                     background: 'linear-gradient(to right,#f0f, #f66)'
                 }
             }).showToast();
+
+            e.preventDefault();
         })
     })
 
@@ -67,7 +68,7 @@ const actualizarCarrito = () => {
     for(const producto of carrito){ 
         tablaBody.innerHTML+=`
         <tr>
-            <td > <a id="eliminar(${producto.id})" href="#cd tablaBody" class="btn btn-primary"><i class="bi bi-trash3-fill"></i></a></td>
+            <td > <a id="eliminar(${producto.id})" href="#tablaBody" class="btn btn-primary"><i class="bi bi-trash3-fill"></i></a></td>
             <td >${producto.nombre}</td>
             <td >$ ${producto.precio}</td>
         </tr>
@@ -76,8 +77,9 @@ const actualizarCarrito = () => {
         localStorage.setItem('carrito', JSON.stringify(carrito))
 
         const botonEliminar = document.getElementById(`eliminar(${producto.id})`)
-        botonEliminar.addEventListener('click', ()=>{
+        botonEliminar.addEventListener('click', (e)=>{
             eliminarDelCarrito(producto.id)
+            e.preventDefault();
         })
         
     }
