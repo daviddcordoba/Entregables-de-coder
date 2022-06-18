@@ -1,14 +1,17 @@
 const grupoCartas = document.getElementById('grupoCartas')
 const precioTotal = document.getElementById('precioTotal')
-    const tablaBody = document.getElementById('tablaBody')
-let carrito = [];
+const tablaBody = document.getElementById('tablaBody')
+
+let carrito 
 
 document.addEventListener('DOMContentLoaded', () => {
     if(localStorage.getItem('carrito')){
-        carrito = JSON.parse(localStorage.getItem('carrito'))
+        carrito = JSON.parse(localStorage.getItem('carrito')) || [] // uso de operador logico OR
         actualizarCarrito();
     }
 })
+
+
 
 
 
