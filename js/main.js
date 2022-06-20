@@ -2,14 +2,15 @@ const grupoCartas = document.getElementById('grupoCartas')
 const precioTotal = document.getElementById('precioTotal')
 const tablaBody = document.getElementById('tablaBody')
 
-let carrito 
+let carrito = []
 
 document.addEventListener('DOMContentLoaded', (e) => {
+    e.preventDefault();
     if(localStorage.getItem('carrito')){
         carrito = JSON.parse(localStorage.getItem('carrito')) || [] // uso de operador logico OR
         actualizarCarrito();
     }
-    e.preventDefault();
+    
 })
 
 mostrarProductos();
@@ -31,7 +32,7 @@ function mostrarProductos() {
     //Evento para el boton(que va a pasar cuando de click en 'comprar')
     stockProductos.forEach(producto => {
         document.getElementById(`agregar${producto.id}`).addEventListener('click', function(e){
-            
+            e.preventDefault();
             agregarAlCarrito(producto.id);
 
             Toastify({
@@ -44,7 +45,7 @@ function mostrarProductos() {
                 }
             }).showToast();
 
-            e.preventDefault();
+            
         })
     })
 
@@ -53,10 +54,23 @@ function mostrarProductos() {
 const agregarAlCarrito = (prodID) => {
     const item = stockProductos.find( (prod) => prod.id === prodID)
 
+
     carrito.push(item)
-    /* alert("Agregado al carrito") */
+    actualizarCarrito();
+
+
+}
+const eliminarDelCarrito = (prodID) => {
+    /* const item = carrito.find((prod)=> prod.id === prodID) 
+    const indice = carrito.indexOf(item) */
+
+    const indice = carrito.findIndex( (producto) => producto.id === prodID);
+    if ( indice < 0) return;
+
+    carrito.splice(indice,1)
     actualizarCarrito();
 }
+
 
 
 const actualizarCarrito = () => {
@@ -65,33 +79,19 @@ const actualizarCarrito = () => {
 
     tablaBody.innerHTML = "";//para que no se repitan elementos
 
-    for(const producto of carrito){ 
+    carrito.forEach( (producto ) => { 
         tablaBody.innerHTML+=`
         <tr>
-            <td > <a id="eliminar(${producto.id})" href="#tablaBody" class="btn btn-primary"><i class="bi bi-trash3-fill"></i></a></td>
-            <td >${producto.nombre}</td>
+            <td > <button onclick="eliminarDelCarrito(${producto.id})"  class="btn btn-primary"><i class="bi bi-trash3-fill"></i></button></td>
+            <td >${producto.nombre} <span id="cantidad">x${producto.cantidad} </span> </td>
             <td >$ ${producto.precio}</td>
         </tr>
         `;
 
         localStorage.setItem('carrito', JSON.stringify(carrito))
-
-        const botonEliminar = document.getElementById(`eliminar(${producto.id})`)
-        botonEliminar.addEventListener('click', (e)=>{
-            eliminarDelCarrito(producto.id)
-            e.preventDefault();
-        })
-        
-    }
+    })
     
 }
 
 
 
-const eliminarDelCarrito = (prodID) => {
-    const item = carrito.find((prod)=> prod.id === prodID) 
-    const indice = carrito.indexOf(item)
-
-    carrito.splice(indice,1)
-    actualizarCarrito();
-}
