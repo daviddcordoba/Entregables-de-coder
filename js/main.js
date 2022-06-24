@@ -35,16 +35,6 @@ function mostrarProductos() {
             e.preventDefault();
             agregarAlCarrito(producto.id);
 
-            Toastify({
-                text: "Elemento agregado al carrito",
-                duration: 2000,
-                gravity: 'bottom',
-                position: 'left',
-                style: {
-                    background: 'linear-gradient(to right,#f0f, #f66)'
-                }
-            }).showToast();
-
             
         })
     })
@@ -52,18 +42,26 @@ function mostrarProductos() {
 }
 
 const agregarAlCarrito = (prodID) => {
+    
     const item = stockProductos.find( (prod) => prod.id === prodID)
 
 
     carrito.push(item)
+    Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'Something went wrong!',
+        footer: '<a href="">Why do I have this issue?</a>'
+      })
     actualizarCarrito();
+    
 
 
 }
 const eliminarDelCarrito = (prodID) => {
     /* const item = carrito.find((prod)=> prod.id === prodID) 
     const indice = carrito.indexOf(item) */
-
+    
     const indice = carrito.findIndex( (producto) => producto.id === prodID);
     if ( indice < 0) return;
 
