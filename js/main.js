@@ -1,3 +1,5 @@
+
+
 const grupoCartas = document.getElementById('grupoCartas')
 const precioTotal = document.getElementById('precioTotal')
 const tablaBody = document.getElementById('tablaBody')
@@ -49,8 +51,15 @@ function mostrarProductos(data) {
         e.preventDefault();
             
         const item = data.find( (prod) => prod.id === producto.id)
-            
+        Swal.fire({
+            position: 'bottom-end',
+            icon: 'success',
+            title: producto.nombre + ' agregado al carrito',
+            showConfirmButton: false,
+            timer: 970
+          })
         if(carrito.includes(item)){
+            
             item.cantidad++
             
         }else{ 
@@ -64,29 +73,25 @@ function mostrarProductos(data) {
 
 }
 
-/* const agregarAlCarrito = (data) => {
-    
-    const item = data.find( (prod) => prod.id === prodID)
 
-    if(carrito.includes(item)){
-        item.cantidad++
-        
-    }else{ 
-    carrito.push(item)
-    }
-    actualizarCarrito();
-    
-} */
 
 const eliminarDelCarrito = (prodID) => {
     const item = carrito.find((prod)=> prod.id === prodID) 
     const indice = carrito.indexOf(item)
-
+    Swal.fire({
+        position: 'bottom-end',
+        icon: 'error',
+        title: item.nombre + ' eliminado del carrito',
+        showConfirmButton: false,
+        timer: 970
+    })
+    
     item.cantidad--;
-
-    if(item.cantidad < 1){
+    if(item.cantidad == 0){
+        item.cantidad = 1 // porque sino el carrito empieza en 0 y quiero que empiece en 1
         carrito.splice(indice,1)
     }
+    
     actualizarCarrito();
 }
 
