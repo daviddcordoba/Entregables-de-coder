@@ -45,27 +45,25 @@ const agregarAlCarrito = (prodID) => {
     
     const item = stockProductos.find( (prod) => prod.id === prodID)
 
-
+    if(carrito.includes(item)){
+        item.cantidad++
+        
+    }else{ 
     carrito.push(item)
-    Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'Something went wrong!',
-        footer: '<a href="">Why do I have this issue?</a>'
-      })
+    }
     actualizarCarrito();
     
-
-
 }
-const eliminarDelCarrito = (prodID) => {
-    /* const item = carrito.find((prod)=> prod.id === prodID) 
-    const indice = carrito.indexOf(item) */
-    
-    const indice = carrito.findIndex( (producto) => producto.id === prodID);
-    if ( indice < 0) return;
 
-    carrito.splice(indice,1)
+const eliminarDelCarrito = (prodID) => {
+    const item = carrito.find((prod)=> prod.id === prodID) 
+    const indice = carrito.indexOf(item)
+
+    item.cantidad--;
+
+    if(item.cantidad < 1){
+        carrito.splice(indice,1)
+    }
     actualizarCarrito();
 }
 
@@ -75,14 +73,14 @@ const actualizarCarrito = () => {
     //Actualizo precio total
     precioTotal.innerText = "Total: " + carrito.reduce((acc,prod) => acc + prod.precio, 0);
 
-    tablaBody.innerHTML = "";//para que no se repitan elementos
+    tablaBody.innerHTML = ``;//para que no se repitan elementos
 
     carrito.forEach( (producto ) => { 
         tablaBody.innerHTML+=`
         <tr>
             <td > <button onclick="eliminarDelCarrito(${producto.id})"  class="btn btn-primary"><i class="bi bi-trash3-fill"></i></button></td>
             <td >${producto.nombre} <span id="cantidad">x${producto.cantidad} </span> </td>
-            <td >$ ${producto.precio}</td>
+            <td >$ ${producto.precio*producto.cantidad}</td>
         </tr>
         `;
 
