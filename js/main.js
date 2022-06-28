@@ -4,6 +4,22 @@ const tablaBody = document.getElementById('tablaBody')
 
 let carrito = []
 
+
+
+const solicitarProductos = async () =>{
+
+    const respuesta = await fetch('api.json')
+    const data = await respuesta.json()
+    
+    
+    
+    mostrarProductos(data);
+    
+    
+    
+}
+solicitarProductos()
+
 document.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault();
     if(localStorage.getItem('carrito')){
@@ -13,10 +29,8 @@ document.addEventListener('DOMContentLoaded', (e) => {
     
 })
 
-mostrarProductos();
-
-function mostrarProductos() {
-    for(const producto of stockProductos){
+function mostrarProductos(data) {
+    data.forEach( producto => {
         grupoCartas.innerHTML += `<div class="card text-center">
         <img src="${producto.foto}" class="card-img-top" alt="..." >
         <div class="card-body">
@@ -27,13 +41,22 @@ function mostrarProductos() {
             <a id="agregar${producto.id}" href="#" class="btn btn-primary">Comprar</a>
         </div>
     </div>`;
-    }
+    })
 
     //Evento para el boton(que va a pasar cuando de click en 'comprar')
-    stockProductos.forEach(producto => {
+    data.forEach(producto => {
         document.getElementById(`agregar${producto.id}`).addEventListener('click', function(e){
-            e.preventDefault();
-            agregarAlCarrito(producto.id);
+        e.preventDefault();
+            
+        const item = data.find( (prod) => prod.id === producto.id)
+            
+        if(carrito.includes(item)){
+            item.cantidad++
+            
+        }else{ 
+        carrito.push(item)
+        }
+        actualizarCarrito();
 
             
         })
@@ -41,9 +64,9 @@ function mostrarProductos() {
 
 }
 
-const agregarAlCarrito = (prodID) => {
+/* const agregarAlCarrito = (data) => {
     
-    const item = stockProductos.find( (prod) => prod.id === prodID)
+    const item = data.find( (prod) => prod.id === prodID)
 
     if(carrito.includes(item)){
         item.cantidad++
@@ -53,7 +76,7 @@ const agregarAlCarrito = (prodID) => {
     }
     actualizarCarrito();
     
-}
+} */
 
 const eliminarDelCarrito = (prodID) => {
     const item = carrito.find((prod)=> prod.id === prodID) 
@@ -71,7 +94,7 @@ const eliminarDelCarrito = (prodID) => {
 
 const actualizarCarrito = () => {
     //Actualizo precio total
-    precioTotal.innerText = "Total: " + carrito.reduce((acc,prod) => acc + prod.precio, 0);
+    precioTotal.innerText = "Total: " + carrito.reduce((acc,prod) => acc + (prod.precio*prod.cantidad), 0);
 
     tablaBody.innerHTML = ``;//para que no se repitan elementos
 
