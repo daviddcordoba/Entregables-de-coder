@@ -2,42 +2,42 @@
     "id":1,
     "foto": "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcQorHy4jlQ-MrN2ruvj3WBNlekEMn3w8l_9u-wDxjUaqkGNmp6FBFQb7E8sUcaS7NYLTjlOqoQlHh97dFZPOr25NGN-0I6d-9s6oMF_2wakzITy4I5ED4k8&usqp=CAE",
     "nombre" : "Camisa Azul",
-    "precio": 1,
+    "precio": 3100,
     "cantidad" : 1
 },
 {
     "id":2,
-    "foto" : "http://d3ugyf2ht6aenh.cloudfront.net/stores/947/310/products/c0df2595-bca9-4c93-9f66-fa7bee12f1e01-f90f1980b764e9391c15871139841657-640-0.jpeg",
+    "foto" : "https://sc04.alicdn.com/kf/HLB1iMKPU3HqK1RjSZFEq6AGMXXac.jpg",
     "nombre" : "Short Lila",
-    "precio": 2,
+    "precio": 990,
     "cantidad" : 1
 },
 {
     "id":3,
     "foto" : "https://fotos.perfil.com/2021/11/25/cropped/1200/900/center/tendencias-de-verano-el-corset-regresa-y-se-convierte-en-un-must-de-la-temporada-1275137.jpg",
     "nombre" : "Corset",
-    "precio": 3,
+    "precio": 3500,
     "cantidad" : 1
 },
 {
     "id":4,
     "foto" : "https://encrypted-tbn1.gstatic.com/shopping?q=tbn:ANd9GcTDpJQQ6N44f9dC-ROZ4_eqsC-Ni0YHkH2ZX7ot2fIx3m1w12A2sILNAAkLttKEyIWWDI50bYOTd4N0z9vwjyR1Zp6V4jlcyA&usqp=CAY",
     "nombre" : " Camisa Black lillies",
-    "precio": 4,
+    "precio": 5500,
     "cantidad" : 1
 },
 {
     "id":5,
     "foto" : "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcRGntkhE3lKPelQZP3-MvHJG6dpmxwD5kR2rGc6cA4elRnbZHJCW9AVWS0BzDokezHfjzPo-4Q_G5U2RFdgFcp9iBb-C9YHeCUXxuXC5rcj&usqp=CAE",
     "nombre" : "Jean ancho",
-    "precio": 5,
+    "precio": 10000,
     "cantidad" : 1
 },
 {
     "id":6,
     "foto" : "https://desiderata.vteximg.com.br/arquivos/ids/228439-0-0/ZP720915_HM_0040.jpg?v=637915979921870000",
     "nombre" : "Campera soft puffer",
-    "precio": 6,
+    "precio": 15000,
     "cantidad" : 1
 }
 

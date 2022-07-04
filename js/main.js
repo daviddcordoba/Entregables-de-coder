@@ -36,7 +36,7 @@ function mostrarProductos(data) {
             <h5 class="card-title">${producto.nombre}</h5>
             <p class="card-text">$${producto.precio}</p>
         </div>
-        <div class="card-footer">
+        <div class="card-footer bg-white">
             <a id="agregar${producto.id}" href="#" class="btn ">Comprar</a>
         </div>
     </div>`;
@@ -44,9 +44,9 @@ function mostrarProductos(data) {
 
     //Evento para para el boton 'comprar'
     data.forEach(producto => {
-        document.getElementById(`agregar${producto.id}`).addEventListener('click', function(e){
+        document.getElementById(`agregar${producto.id}`).addEventListener('click', function(){
 
-        e.preventDefault();
+        
             
         const item = data.find( prod => prod.id === producto.id)
 
@@ -130,7 +130,7 @@ const pagarTodo = (total)=>{
         
         Swal.fire(
             'Muchas gracias por su compra!',
-            'En breve nos pondremos en contacto para finalizar con la compra',
+            'Nos pondremos en contacto para finalizar con la compra',
             'success'
         );
 
@@ -144,8 +144,13 @@ const pagarTodo = (total)=>{
 const reset = () =>{
     
     carrito.splice(0,carrito.length)
+    
     tablaBody.innerHTML =''
+
     document.querySelector('.badge').innerText=0
+
+    localStorage.setItem('carrito', JSON.stringify(carrito))
+    
 
 }
 
