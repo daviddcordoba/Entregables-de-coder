@@ -1,6 +1,18 @@
-body{
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300&display=swap");
+*{
     margin: 0;
     padding: 0;
+}
+
+body{
+    
+    font-family: "Poppins", sans-serif;
+    overflow-x: hidden;
+    
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: rgb(255, 223, 221);
 }
 
 .titulo{
@@ -16,6 +28,7 @@ body{
     border-collapse: collapse;
     width: 100%;
     table-layout: fixed;
+    
 }
 
 #carrito-container table thead{
@@ -24,7 +37,7 @@ body{
 
 #carrito-container table thead th{
     background: pink;
-    color: white;
+    color: black;
     border: none;
     padding: 6px 0;
 }
@@ -48,14 +61,15 @@ body{
 #carrito-container table td:nth-child(6){
     width: 170px;
 }
-
-
-#carrito-container table tbody i{
-    color: grey;
+#carrito-container table tbody .btn{
+    background: rgb(240, 208, 208)
     
 }
 
-
+#carrito-container table tbody i{
+    color: #fc036b;
+    
+}
 
 /*Productos*/
 .card-img-top
@@ -64,3 +78,20 @@ body{
     height: 400px;
     object-fit: cover;
 }
+
+.si i {
+	font-size: 40px;
+	padding: 20px;
+    color:#fc036b;
+    
+}
+.card-footer .btn{
+    background-color:#fc036b;
+    color: whitesmoke;
+}
+
+#precioTotal .btn{
+    background-color: #fc036b;
+    color: whitesmoke;
+}
+
