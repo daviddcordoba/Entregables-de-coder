@@ -4,8 +4,6 @@ const tablaBody = document.getElementById('tablaBody')
 
 let carrito = []
 
-
-
 const solicitarProductos = async () =>{
 
     const respuesta = await fetch('api.json')
@@ -20,15 +18,14 @@ solicitarProductos()
 document.addEventListener('DOMContentLoaded', (e) => {
     e.preventDefault();
     if(localStorage.getItem('carrito')){
-        carrito = JSON.parse(localStorage.getItem('carrito')) || [] // uso de operador logico OR
+        carrito = JSON.parse(localStorage.getItem('carrito')) || [] 
         actualizarCarrito();
     }
     
 })
 
-
 function mostrarProductos(data) {
-
+    
     data.forEach( producto => {
         grupoCartas.innerHTML += `<div class="card text-center">
         <img src="${producto.foto}" class="card-img-top" alt="..." >
@@ -44,10 +41,9 @@ function mostrarProductos(data) {
 
     //Evento para para el boton 'comprar'
     data.forEach(producto => {
+
         document.getElementById(`agregar${producto.id}`).addEventListener('click', function(){
 
-        
-            
         const item = data.find( prod => prod.id === producto.id)
 
         Swal.fire({
@@ -96,10 +92,8 @@ const eliminarDelCarrito = (prodID) => {
 
 }
 
-
 // Funcion encargada de captar los cambios en el carrito
 const actualizarCarrito = () => {
-    
     
     precioTotal.innerHTML = `<button onclick="pagarTodo(${carrito.reduce((acc,prod) => acc + (prod.precio*prod.cantidad), 0)})" class="btn px-5"> Pagar Todo
                                 <span  class="badge  text-white ms-1 rounded-pill">${carrito.reduce((acc,prod) => acc + (prod.precio*prod.cantidad), 0)}</span>
@@ -108,7 +102,6 @@ const actualizarCarrito = () => {
 
     tablaBody.innerHTML = ``
     
-
     carrito.forEach( (producto ) => { 
         tablaBody.innerHTML+=`
         <tr>
@@ -123,21 +116,25 @@ const actualizarCarrito = () => {
     
 }
 
-// Funcion que muestra un mensaje por pantalla dando por finalizada la compra
-const pagarTodo = (total)=>{
+// Funcion que solicita un correo y muestra por pantalla el mismo
+const pagarTodo = async ()=>{
 
-    setTimeout(() => {
+    const correo = await Swal.fire({
+        title: 'Ingresa tu correo',
+        input: 'email',
+        inputPlaceholder: 'correo@ejemplo.com',
         
-        Swal.fire(
-            'Muchas gracias por su compra!',
-            'Nos pondremos en contacto para finalizar con la compra',
-            'success'
-        );
+    })
+    
+    if (correo.value) {
+        Swal.fire('Muchas Gracias!',
+                    `Se ha enviado un mail a ${correo.value} con los detalles de la misma`
+                    )
+    }else{
+        Swal.fire('Usted no ha ingresado ningun correo')
+    }
 
-        reset()
-        
-        },500);
-        
+    reset()
 }
 
 //Una vez el usuario apreta "Pagar todo", reinicio el carrito
