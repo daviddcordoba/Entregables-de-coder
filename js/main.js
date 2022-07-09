@@ -8,6 +8,7 @@ const solicitarProductos = async () =>{
 
     const respuesta = await fetch('api.json')
     const data = await respuesta.json()
+    
     mostrarProductos(data)
 
 }
@@ -117,24 +118,35 @@ const actualizarCarrito = () => {
 }
 
 // Funcion que solicita un correo y muestra por pantalla el mismo
-const pagarTodo = async ()=>{
-
-    const correo = await Swal.fire({
-        title: 'Ingresa tu correo',
-        input: 'email',
-        inputPlaceholder: 'correo@ejemplo.com',
+const pagarTodo = async (precio)=>{
+    if(precio==0){ 
+        Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'No hay productos en el carrito',
+            
+        })
+    }else{ 
+        const correo = await Swal.fire({
+            title: 'Ingresa tu correo',
+            input: 'email',
+            inputPlaceholder: 'correo@ejemplo.com',
+            
+        })
         
-    })
+        if (correo.value) {
+            Swal.fire('Muchas Gracias!',
+            `Se ha enviado un mail a ${correo.value} con los detalles de la misma`
+            )
+        }else{
+            Swal.fire('Usted no ha ingresado ningun correo')
+        }
+        
+    reset()
+
     
-    if (correo.value) {
-        Swal.fire('Muchas Gracias!',
-                    `Se ha enviado un mail a ${correo.value} con los detalles de la misma`
-                    )
-    }else{
-        Swal.fire('Usted no ha ingresado ningun correo')
     }
 
-    reset()
 }
 
 //Una vez el usuario apreta "Pagar todo", reinicio el carrito
